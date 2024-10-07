@@ -1,24 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchBreeds } from "../thunks";
+import { fetchDogs } from "../thunks";
 
 const dogSlice = createSlice({
   name: "dog",
-  initialState: { data: [], status: "idle", error: null },
+  initialState: { data: [], status: "idle", error: false },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBreeds.pending, (state) => {
+      .addCase(fetchDogs.pending, (state) => {
         state.status = "loading";
-        state.error = "";
       })
-      .addCase(fetchBreeds.fulfilled, (state, action) => {
+      .addCase(fetchDogs.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = action.payload;
-        console.log(state.data);
       })
-      .addCase(fetchBreeds.rejected, (state, action) => {
+      .addCase(fetchDogs.rejected, (state) => {
         state.status = "failed";
-        state.error = action.error.message;
-        console.log(state.error);
+        state.error = true;
       });
   },
 });

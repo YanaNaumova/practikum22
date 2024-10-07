@@ -1,8 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchBreeds = createAsyncThunk("breeds/fetchBreeds", async () => {
+export const fetchDogs = createAsyncThunk("dog/fetchDogs", async () => {
   const response = await axios.get(`https://api.thedogapi.com/v1/breeds`);
-  console.log(response.data);
   return response.data;
 });
